@@ -1,8 +1,13 @@
 Clearpath Additional Simulation Worlds
 ==========================================
 
-This repository contains additional indoor and outdoor simulation environments for use with Clearpath's robot platforms.
+# ROS2 
 
+For ROS2, see https://github.com/clearpathrobotics/clearpath_simulator?tab=readme-ov-file#worlds
+
+# ROS1
+
+This repository contains additional indoor and outdoor simulation environments for use with Clearpath's robot platforms.
 
 Launch Parameters
 -------------------------------------------------------------
