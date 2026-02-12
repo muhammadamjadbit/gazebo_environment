@@ -3,6 +3,50 @@ Clearpath Additional Simulation Worlds
 
 This repository contains additional indoor and outdoor simulation environments for use with Clearpath's robot platforms.
 
+**ROS2 Humble Migration**: This repository has been migrated from ROS1 Noetic to ROS2 Humble. All launch files are now in Python format (`.launch.py`) and the build system uses `ament_cmake`.
+
+## Building for ROS2 Humble
+
+### Prerequisites
+- ROS2 Humble installed
+- Clearpath robot packages for ROS2 (e.g., `husky_gazebo`, `jackal_gazebo`, etc.)
+- Gazebo and `gazebo_ros` packages for ROS2
+
+### Building with colcon
+```bash
+# Navigate to your ROS2 workspace
+cd ~/ros2_ws/src
+
+# Clone this repository
+git clone https://github.com/muhammadamjadbit/gazebo_environment.git
+
+# Install dependencies
+cd ~/ros2_ws
+rosdep install --from-paths src --ignore-src -r -y
+
+# Build the packages
+colcon build --packages-select cpr_agriculture_gazebo cpr_race_modules cpr_obstacle_gazebo \
+  cpr_accessories_gazebo cpr_empty_gazebo cpr_office_gazebo cpr_orchard_gazebo cpr_inspection_gazebo
+
+# Source the workspace
+source install/setup.bash
+```
+
+## Launching Worlds in ROS2
+
+Launch files are now Python-based (`.launch.py` files). Use `ros2 launch` instead of `roslaunch`:
+
+```bash
+# Example: Launch agriculture world with Husky
+ros2 launch cpr_agriculture_gazebo agriculture_world.launch.py
+
+# Example: Launch office world with custom platform
+ros2 launch cpr_office_gazebo office_world.launch.py platform:=jackal
+
+# Example: Launch with custom robot position
+ros2 launch cpr_inspection_gazebo inspection_world.launch.py robot_x:=5.0 robot_y:=2.0 robot_z:=1.0
+```
+
 
 Launch Parameters
 -------------------------------------------------------------
