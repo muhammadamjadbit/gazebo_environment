@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(gazebo_race_modules)
+project(cpr_race_modules)
 
 find_package(ament_cmake REQUIRED)
 

@@ -32,7 +32,7 @@ def generate_launch_description():
     declare_world_name = DeclareLaunchArgument(
         'world_name',
         default_value=PathJoinSubstitution([
-            FindPackageShare('gazebo_race_modules'),
+            FindPackageShare('cpr_race_modules'),
             'worlds',
             'actually_empty_world.world'
         ]),
@@ -57,7 +57,7 @@ def generate_launch_description():
     object_descriptions_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             PathJoinSubstitution([
-                FindPackageShare('gazebo_race_modules'),
+                FindPackageShare('cpr_race_modules'),
                 'launch',
                 'object_descriptions.launch.py'
             ])

@@ -42,7 +42,7 @@ def generate_launch_description():
         value=Command([
             'xacro ',
             PathJoinSubstitution([
-                FindPackageShare('gazebo_race_modules'),
+                FindPackageShare('cpr_race_modules'),
                 'urdf'
             ]),
             '/ground_',
@@ -56,7 +56,7 @@ def generate_launch_description():
         value=Command([
             'xacro ',
             PathJoinSubstitution([
-                FindPackageShare('gazebo_race_modules'),
+                FindPackageShare('cpr_race_modules'),
                 'urdf'
             ]),
             '/',
@@ -74,7 +74,7 @@ def generate_launch_description():
         value=Command([
             'xacro ',
             PathJoinSubstitution([
-                FindPackageShare('gazebo_race_modules'),
+                FindPackageShare('cpr_race_modules'),
                 'urdf'
             ]),
             '/',
@@ -92,7 +92,7 @@ def generate_launch_description():
         value=Command([
             'xacro ',
             PathJoinSubstitution([
-                FindPackageShare('gazebo_race_modules'),
+                FindPackageShare('cpr_race_modules'),
                 'urdf'
             ]),
             '/',
@@ -110,7 +110,7 @@ def generate_launch_description():
         value=Command([
             'xacro ',
             PathJoinSubstitution([
-                FindPackageShare('gazebo_race_modules'),
+                FindPackageShare('cpr_race_modules'),
                 'urdf'
             ]),
             '/',

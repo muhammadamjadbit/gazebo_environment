@@ -39,7 +39,7 @@ def generate_launch_description():
     spawn_world_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             PathJoinSubstitution([
-                FindPackageShare('gazebo_race_modules'),
+                FindPackageShare('cpr_race_modules'),
                 'launch',
                 'spawn_world.launch.py'
             ])
@@ -49,7 +49,7 @@ def generate_launch_description():
     object_descriptions_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             PathJoinSubstitution([
-                FindPackageShare('gazebo_race_modules'),
+                FindPackageShare('cpr_race_modules'),
                 'launch',
                 'object_descriptions.launch.py'
             ])

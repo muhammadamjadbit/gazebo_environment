@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>gazebo_race_modules</name>
+  <name>cpr_race_modules</name>
   <version>0.2.8</version>
   <description>The gazebo_race_modules package</description>
 
