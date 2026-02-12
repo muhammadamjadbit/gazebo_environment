@@ -85,7 +85,7 @@ def generate_launch_description():
                     'urdf',
                     'obstacle_geometry.urdf.xacro'
                 ]),
-                ' world_scale:=3.0',
+                ' world_scale:=', world_scale,
                 ' walls:=', walls
             ]),
             'use_sim_time': use_sim_time
