@@ -102,9 +102,12 @@ def generate_launch_description():
         PythonLaunchDescriptionSource([
             PathJoinSubstitution([
                 FindPackageShare('cpr_office_gazebo'),
-                'launch',
-                ['spawn_', platform, '.launch.py']
-            ])
+                'launch'
+            ]),
+            '/',
+            'spawn_',
+            platform,
+            '.launch.py'
         ]),
         launch_arguments={
             'x': robot_x,

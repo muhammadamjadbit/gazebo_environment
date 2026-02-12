@@ -1,7 +1,8 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, SetParameter
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, Command
+from launch.substitutions import LaunchConfiguration, Command
 from launch_ros.substitutions import FindPackageShare
+from launch.substitutions import PathJoinSubstitution, TextSubstitution
 
 
 def generate_launch_description():
@@ -34,16 +35,17 @@ def generate_launch_description():
         description='Size of objects'
     )
     
-    # Set parameters using xacro
+    # Set parameters using xacro commands
+    # These parameters will be available to spawn_entity nodes
     ground_description = SetParameter(
         name='ground_description',
         value=Command([
             'xacro ',
             PathJoinSubstitution([
                 FindPackageShare('gazebo_race_modules'),
-                'urdf',
-                'ground_'
+                'urdf'
             ]),
+            '/ground_',
             complexity,
             '.urdf.xacro'
         ])
@@ -55,9 +57,9 @@ def generate_launch_description():
             'xacro ',
             PathJoinSubstitution([
                 FindPackageShare('gazebo_race_modules'),
-                'urdf',
-                ''
+                'urdf'
             ]),
+            '/',
             size,
             '_',
             barrier_type,
@@ -73,9 +75,9 @@ def generate_launch_description():
             'xacro ',
             PathJoinSubstitution([
                 FindPackageShare('gazebo_race_modules'),
-                'urdf',
-                ''
+                'urdf'
             ]),
+            '/',
             size,
             '_',
             barrier_type,
@@ -91,9 +93,9 @@ def generate_launch_description():
             'xacro ',
             PathJoinSubstitution([
                 FindPackageShare('gazebo_race_modules'),
-                'urdf',
-                ''
+                'urdf'
             ]),
+            '/',
             size,
             '_',
             track_type,
@@ -109,9 +111,9 @@ def generate_launch_description():
             'xacro ',
             PathJoinSubstitution([
                 FindPackageShare('gazebo_race_modules'),
-                'urdf',
-                ''
+                'urdf'
             ]),
+            '/',
             size,
             '_',
             track_type,
