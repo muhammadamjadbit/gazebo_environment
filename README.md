@@ -1,15 +1,18 @@
 Clearpath Additional Simulation Worlds
 ==========================================
 
-This repository contains additional indoor and outdoor simulation environments for use with Clearpath's robot platforms.
+This repository contains additional indoor and outdoor simulation environments for use with Clearpath's robot platforms and the Scout Mini robot from AgileX Robotics.
 
 **ROS2 Humble Migration**: This repository has been migrated from ROS1 Noetic to ROS2 Humble. All launch files are now in Python format (`.launch.py`) and the build system uses `ament_cmake`.
+
+**Scout Mini Integration**: All environments have been adapted to work with the Scout Mini robot, which is the default platform for the PIEC project.
 
 ## Building for ROS2 Humble
 
 ### Prerequisites
 - ROS2 Humble installed
-- Clearpath robot packages for ROS2 (e.g., `husky_gazebo`, `jackal_gazebo`, etc.)
+- Scout Mini robot packages for ROS2 (`scout_description`)
+- Clearpath robot packages for ROS2 (e.g., `husky_gazebo`, `jackal_gazebo`, etc.) - optional for backwards compatibility
 - Gazebo and `gazebo_ros` packages for ROS2
 
 ### Building with colcon
@@ -37,10 +40,13 @@ source install/setup.bash
 Launch files are now Python-based (`.launch.py` files). Use `ros2 launch` instead of `roslaunch`:
 
 ```bash
-# Example: Launch agriculture world with Husky
+# Example: Launch agriculture world with Scout Mini (default)
 ros2 launch cpr_agriculture_gazebo agriculture_world.launch.py
 
-# Example: Launch office world with custom platform
+# Example: Launch office world with Scout Mini (default)
+ros2 launch cpr_office_gazebo office_world.launch.py
+
+# Example: Launch with custom platform (for backwards compatibility)
 ros2 launch cpr_office_gazebo office_world.launch.py platform:=jackal
 
 # Example: Launch with custom robot position
@@ -56,11 +62,9 @@ launch files accept the following arguments:
 
 Robot model:
 - `platform`
-The `platform` argument defaults to the `CPR_GAZEBO_PLATFORM` environment variable if it exists, otherwise a
-size-appropriate robot is chosen as the default.  Each world supports different robots.  For example Dingo and Ridgeback
-are not available on outdoor worlds.  Please refer to the specific world for supported robots.  Available robots for
-any given world will be a subset of:
-- `husky` (the most common default)
+The `platform` argument defaults to the `CPR_GAZEBO_PLATFORM` environment variable if it exists, otherwise **Scout Mini** (`scout_mini`) is chosen as the default.  Each world supports different robots.  For example Dingo and Ridgeback are not available on outdoor worlds.  Please refer to the specific world for supported robots.  Available robots for any given world will be a subset of:
+- `scout_mini` (the default platform for PIEC project)
+- `husky`
 - `jackal`
 - `warthog`
 - `dingo`

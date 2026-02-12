@@ -26,7 +26,7 @@ def generate_launch_description():
     
     declare_platform = DeclareLaunchArgument(
         'platform',
-        default_value=EnvironmentVariable('CPR_GAZEBO_PLATFORM', default_value='jackal'),
+        default_value=EnvironmentVariable('CPR_GAZEBO_PLATFORM', default_value='scout_mini'),
         description='Robot platform to spawn'
     )
     
