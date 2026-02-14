@@ -52,7 +52,8 @@ def generate_launch_description():
         launch_arguments={
             'world': world_name,
             'gui': gui,
-            'verbose': 'false'
+            'verbose': 'false',
+            'pause': 'false'
         }.items()
     )
     
