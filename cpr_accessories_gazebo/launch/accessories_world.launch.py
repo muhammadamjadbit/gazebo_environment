@@ -10,13 +10,7 @@ from launch_ros.parameter_descriptions import ParameterValue
 
 
 def generate_launch_description():
-    # Environment geometry position arguments
-    world_x = LaunchConfiguration('world_x')
-    world_y = LaunchConfiguration('world_y')
-    world_z = LaunchConfiguration('world_z')
-    world_yaw = LaunchConfiguration('world_yaw')
-    
-    # Robot spawn position arguments (elevated platform for inspection)
+    # Robot spawn position arguments
     robot_x = LaunchConfiguration('robot_x')
     robot_y = LaunchConfiguration('robot_y')
     robot_z = LaunchConfiguration('robot_z')
@@ -27,15 +21,9 @@ def generate_launch_description():
     headless = LaunchConfiguration('headless')
     world_name = LaunchConfiguration('world_name')
     
-    declare_world_x = DeclareLaunchArgument('world_x', default_value='0.0')
-    declare_world_y = DeclareLaunchArgument('world_y', default_value='0.0')
-    declare_world_z = DeclareLaunchArgument('world_z', default_value='0.0')
-    declare_world_yaw = DeclareLaunchArgument('world_yaw', default_value='0.0')
-    
-    # Inspection world has elevated platform
     declare_robot_x = DeclareLaunchArgument('robot_x', default_value='0.0')
-    declare_robot_y = DeclareLaunchArgument('robot_y', default_value='-10.0')
-    declare_robot_z = DeclareLaunchArgument('robot_z', default_value='5.2346')
+    declare_robot_y = DeclareLaunchArgument('robot_y', default_value='0.0')
+    declare_robot_z = DeclareLaunchArgument('robot_z', default_value='0.2346')
     declare_robot_yaw = DeclareLaunchArgument('robot_yaw', default_value='0.0')
     
     declare_use_sim_time = DeclareLaunchArgument('use_sim_time', default_value='true')
@@ -45,9 +33,9 @@ def generate_launch_description():
     declare_world_name = DeclareLaunchArgument(
         'world_name',
         default_value=PathJoinSubstitution([
-            FindPackageShare('cpr_inspection_gazebo'),
+            FindPackageShare('cpr_accessories_gazebo'),
             'worlds',
-            'inspection_world.world'
+            'actually_empty_world.world'
         ])
     )
     
@@ -89,25 +77,6 @@ def generate_launch_description():
         ],
     )
     
-    # Set inspection geometry parameter
-    inspection_geom_param = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        name='inspection_geom_publisher',
-        parameters=[{
-            'robot_description': Command([
-                'xacro ',
-                PathJoinSubstitution([
-                    FindPackageShare('cpr_inspection_gazebo'),
-                    'urdf',
-                    'inspection_geometry.urdf.xacro'
-                ])
-            ]),
-            'use_sim_time': use_sim_time
-        }],
-        remappings=[('robot_description', 'inspection_geom')]
-    )
-    
     # Launch Gazebo
     gazebo_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
@@ -123,23 +92,6 @@ def generate_launch_description():
             'verbose': 'false',
             'pause': 'false'
         }.items()
-    )
-    
-    # Spawn inspection world geometry
-    spawn_inspection = Node(
-        package='gazebo_ros',
-        executable='spawn_entity.py',
-        name='inspection_world_spawner',
-        arguments=[
-            '-entity', 'inspection_geometry',
-            '-topic', 'inspection_geom',
-            '-x', world_x,
-            '-y', world_y,
-            '-z', world_z,
-            '-Y', world_yaw
-        ],
-        parameters=[{'use_sim_time': use_sim_time}],
-        output='screen'
     )
     
     # Spawn Scout Mini robot
@@ -162,10 +114,6 @@ def generate_launch_description():
     )
     
     return LaunchDescription([
-        declare_world_x,
-        declare_world_y,
-        declare_world_z,
-        declare_world_yaw,
         declare_robot_x,
         declare_robot_y,
         declare_robot_z,
@@ -174,9 +122,7 @@ def generate_launch_description():
         declare_gui,
         declare_headless,
         declare_world_name,
-        inspection_geom_param,
         robot_state_publisher,
         gazebo_launch,
-        spawn_inspection,
         spawn_robot
     ])
