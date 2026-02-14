@@ -1,18 +1,13 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, Command, EnvironmentVariable
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, Command
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
     # Declare arguments
-    platform = LaunchConfiguration('platform')
-    robot_x = LaunchConfiguration('robot_x')
-    robot_y = LaunchConfiguration('robot_y')
-    robot_z = LaunchConfiguration('robot_z')
-    robot_yaw = LaunchConfiguration('robot_yaw')
     world_x = LaunchConfiguration('world_x')
     world_y = LaunchConfiguration('world_y')
     world_z = LaunchConfiguration('world_z')
@@ -21,17 +16,6 @@ def generate_launch_description():
     gui = LaunchConfiguration('gui')
     headless = LaunchConfiguration('headless')
     world_name = LaunchConfiguration('world_name')
-    
-    declare_platform = DeclareLaunchArgument(
-        'platform',
-        default_value=EnvironmentVariable('CPR_GAZEBO_PLATFORM', default_value='scout_mini'),
-        description='Robot platform to spawn'
-    )
-    
-    declare_robot_x = DeclareLaunchArgument('robot_x', default_value='-11.0')
-    declare_robot_y = DeclareLaunchArgument('robot_y', default_value='9.0')
-    declare_robot_z = DeclareLaunchArgument('robot_z', default_value='0.2')
-    declare_robot_yaw = DeclareLaunchArgument('robot_yaw', default_value='1.5707963267948966')
     
     declare_world_x = DeclareLaunchArgument('world_x', default_value='0.0')
     declare_world_y = DeclareLaunchArgument('world_y', default_value='0.0')
@@ -102,29 +86,7 @@ def generate_launch_description():
         parameters=[{'use_sim_time': use_sim_time}]
     )
     
-    # Include robot spawn launch file
-    robot_spawn_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            PathJoinSubstitution([
-                FindPackageShare('cpr_orchard_gazebo'),
-                'launch',
-                ['spawn_', platform, '.launch.py']
-            ])
-        ),
-        launch_arguments={
-            'x': robot_x,
-            'y': robot_y,
-            'z': robot_z,
-            'yaw': robot_yaw
-        }.items()
-    )
-    
     return LaunchDescription([
-        declare_platform,
-        declare_robot_x,
-        declare_robot_y,
-        declare_robot_z,
-        declare_robot_yaw,
         declare_world_x,
         declare_world_y,
         declare_world_z,
@@ -135,6 +97,5 @@ def generate_launch_description():
         declare_world_name,
         orchard_geom_param,
         gazebo_launch,
-        spawn_orchard,
-        robot_spawn_launch
+        spawn_orchard
     ])
