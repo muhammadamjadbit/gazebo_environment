@@ -85,7 +85,8 @@ def generate_launch_description():
             '-z', world_z,
             '-Y', world_yaw
         ],
-        parameters=[{'use_sim_time': use_sim_time}]
+        parameters=[{'use_sim_time': use_sim_time}],
+        output='screen'
     )
     
     return LaunchDescription([
