@@ -17,7 +17,7 @@
   <exec_depend>hector_gazebo_plugins</exec_depend>
   <exec_depend>pointcloud_to_laserscan</exec_depend>
 
-  <exec_depend>scout_description</exec_depend>
+  <exec_depend>agilex_scout</exec_depend>
   <exec_depend>boxer_gazebo</exec_depend>
   <exec_depend>dingo_gazebo</exec_depend>
   <exec_depend>husky_gazebo</exec_depend>

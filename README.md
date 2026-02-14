@@ -11,7 +11,7 @@ This repository contains additional indoor and outdoor simulation environments f
 
 ### Prerequisites
 - ROS2 Humble installed
-- Scout Mini robot packages for ROS2 (`scout_description`)
+- Scout Mini robot packages for ROS2 (`agilex_scout`)
 - Clearpath robot packages for ROS2 (e.g., `husky_gazebo`, `jackal_gazebo`, etc.) - optional for backwards compatibility
 - Gazebo and `gazebo_ros` packages for ROS2
 
