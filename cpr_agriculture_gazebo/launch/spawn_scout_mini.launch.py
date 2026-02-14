@@ -18,7 +18,7 @@ def generate_launch_description():
     
     declare_x = DeclareLaunchArgument('x', default_value='0.0')
     declare_y = DeclareLaunchArgument('y', default_value='0.0')
-    declare_z = DeclareLaunchArgument('z', default_value='0.0')
+    declare_z = DeclareLaunchArgument('z', default_value='0.2')
     declare_yaw = DeclareLaunchArgument('yaw', default_value='0.0')
     declare_use_sim_time = DeclareLaunchArgument('use_sim_time', default_value='true')
     declare_odometry_source = DeclareLaunchArgument('odometry_source', default_value='ground_truth')
