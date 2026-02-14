@@ -3,7 +3,7 @@ project(cpr_accessories_gazebo)
 
 find_package(ament_cmake REQUIRED)
 
-install(DIRECTORY meshes urdf
+install(DIRECTORY launch meshes urdf worlds
   DESTINATION share/${PROJECT_NAME}
 )
 
